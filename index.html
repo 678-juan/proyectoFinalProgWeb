@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoja de Vida - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Persona Natural — Leyes 190 de 1995, 489 y 443 de 1998</p>
+    </header>
+
+    <nav>
+        <span>Inicio</span>
+    </nav>
+
+    <main>
+        <section id="login">
+            <h2>Iniciar Sesión</h2>
+
+            <div class="campo">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" placeholder="Ingresa tu usuario">
+            </div>
+
+            <div class="campo">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Ingresa tu contraseña">
+            </div>
+
+            <button onclick="login()">Ingresar</button>
+
+            <p id="error"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>DAFP — Línea gratuita: 018000917770</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
