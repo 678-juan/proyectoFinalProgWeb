@@ -6,6 +6,7 @@
     const listaIdiomas = document.getElementById("listaIdiomas");
     const btnAgregarSuperior = document.getElementById("agregarSuperior");
     const btnAgregarIdioma = document.getElementById("agregarIdioma");
+    const btnContinuarFormacion = document.getElementById("continuarFormacion");
 
     const seccionForm = document.getElementById("formacion-academica");
     const seccionResumen = document.getElementById("resumenFormacion");
@@ -331,6 +332,10 @@
 
     btnAgregarSuperior.addEventListener("click", agregarSuperior);
     btnAgregarIdioma.addEventListener("click", agregarIdioma);
+
+    btnContinuarFormacion.addEventListener("click", function () {
+        window.location.href = "experiencia-laboral.html";
+    });
 
     btnEditar.addEventListener("click", function () {
         seccionResumen.style.display = "none";
