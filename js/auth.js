@@ -1,28 +1,31 @@
-// Logica de autenticación
+// logica basica de auth
 const users = [
     { username: "admin", password: "admin123" },
     { username: "user1", password: "123" }
 ];
 
-function login(username, password) {
-    const inputUsername = document.getElementById("username").value;
+function login() {
+    // leemos lo q escribe el usuario
+    const inputUsername = document.getElementById("usuario").value.trim();
     const inputPassword = document.getElementById("password").value;
+    const errorText = document.getElementById("error");
 
+    // limpiamos error viejito
+    errorText.textContent = "";
+
+    // buscamos si existe una combinacion valida
     const encontrado = users.find(function(u){
         return u.username === inputUsername && u.password === inputPassword;
     });
 
     if (encontrado) {
-        // Autenticación exitosa
-        localStorage.setItem("loggedInUser", encontrado.username, JSON.stringify(encontrado));
+        // guardamos sesion simple  en localstorage
+        localStorage.setItem("loggedInUser", JSON.stringify(encontrado));
     
-        if(encontrado.username === "administrador"){
-            window.location.href = "Pages/admin.html";
-        }else{
-            window.location.href = "Pages/datos-personales.html";
-        }
-    }else {
-        // Autenticación fallida
-        document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
+        // luego de login correcto va directo a datos personales
+        window.location.href = "Pages/datos-personales.html";
+    } else {
+        // mensaje simple si falla el login
+        errorText.textContent = "Usuario o contraseña incorrectos.";
     }
 }

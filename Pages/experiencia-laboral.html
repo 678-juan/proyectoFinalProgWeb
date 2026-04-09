@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Experiencia Laboral - Hoja de Vida</title>
+	<link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+	<header>
+		<h1>Formato Único Hoja de Vida</h1>
+		<p>Persona Natural</p>
+	</header>
+
+	<nav>
+		<span>Paso 3 de 5 - Experiencia Laboral</span>
+	</nav>
+
+	<main>
+		<section id="experiencia-laboral">
+			<h2>3. Experiencia Laboral</h2>
+			<p>
+				Relacione su experiencia laboral o de prestación de servicios en orden cronológico,
+				comenzando por el empleo actual o contrato vigente.
+			</p>
+
+			<form id="formExperiencia" novalidate>
+				<div id="listaExperiencias"></div>
+
+				<div class="acciones-formulario">
+					<button type="button" id="agregarExperiencia">+ Agregar empleo anterior</button>
+				</div>
+
+				<div class="campo">
+					<label for="observacionesExperiencia">Observaciones (opcional)</label>
+					<textarea id="observacionesExperiencia" rows="4" placeholder="Escriba aquí una observación general de su experiencia..."></textarea>
+				</div>
+
+				<p id="errorExperiencia" class="mensaje-error"></p>
+
+				<div class="acciones-formulario">
+					<button type="submit">Guardar y continuar</button>
+				</div>
+			</form>
+		</section>
+
+		<section id="resumenExperiencia" style="display:none">
+			<h2>Resumen - Experiencia Laboral</h2>
+			<div id="contenidoResumenExperiencia"></div>
+
+			<div class="acciones-formulario">
+				<button type="button" id="editarExperiencia">Editar</button>
+				<button type="button" id="confirmarExperiencia">Confirmar y seguir</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>DAFP - Línea gratuita: 018000917770</p>
+	</footer>
+
+	<script src="../js/data.js"></script>
+	<script src="../js/experiencia-laboral.js"></script>
+
+</body>
+</html>

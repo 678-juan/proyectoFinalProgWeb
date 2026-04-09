@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formación Académica - Hoja de Vida</title>
+	<link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+	<header>
+		<h1>Formato Único Hoja de Vida</h1>
+		<p>Persona Natural</p>
+	</header>
+
+	<nav>
+		<span>Paso 2 de 5 - Formación Académica</span>
+	</nav>
+
+	<main>
+		<section id="formacion-academica">
+			<h2>2. Formación Académica</h2>
+
+			<form id="formFormacion" novalidate>
+				<article class="academica-card">
+					<h3>Educación básica y media</h3>
+
+					<div class="experiencia-grid">
+						<div class="campo col-4">
+							<label for="ultimoGrado">Último grado aprobado *</label>
+							<select id="ultimoGrado" required>
+								<option value="">Seleccione...</option>
+								<option value="1">1°</option>
+								<option value="2">2°</option>
+								<option value="3">3°</option>
+								<option value="4">4°</option>
+								<option value="5">5°</option>
+								<option value="6">6°</option>
+								<option value="7">7°</option>
+								<option value="8">8°</option>
+								<option value="9">9°</option>
+								<option value="10">10°</option>
+								<option value="11">11°</option>
+							</select>
+						</div>
+
+						<div class="campo col-8">
+							<label for="tituloBasica">Título obtenido</label>
+							<input type="text" id="tituloBasica" maxlength="120" placeholder="Ej: Bachiller académico">
+						</div>
+
+						<div class="campo col-6">
+							<label for="mesGradoBasica">Mes de grado *</label>
+							<select id="mesGradoBasica" required>
+								<option value="">Seleccione...</option>
+								<option value="01">Enero</option>
+								<option value="02">Febrero</option>
+								<option value="03">Marzo</option>
+								<option value="04">Abril</option>
+								<option value="05">Mayo</option>
+								<option value="06">Junio</option>
+								<option value="07">Julio</option>
+								<option value="08">Agosto</option>
+								<option value="09">Septiembre</option>
+								<option value="10">Octubre</option>
+								<option value="11">Noviembre</option>
+								<option value="12">Diciembre</option>
+							</select>
+						</div>
+
+						<div class="campo col-6">
+							<label for="anioGradoBasica">Año de grado *</label>
+							<input type="number" id="anioGradoBasica" min="1950" max="2100" required>
+						</div>
+					</div>
+				</article>
+
+				<article class="academica-card">
+					<div class="academica-header">
+						<h3>Educación superior (pregrado y postgrado)</h3>
+						<button type="button" id="agregarSuperior" class="btn-secundario">+ Agregar estudio</button>
+					</div>
+					<p>Relacione en orden cronológico su educación superior.</p>
+					<div id="listaEducacionSuperior"></div>
+				</article>
+
+				<article class="academica-card">
+					<div class="academica-header">
+						<h3>Idiomas diferentes al español</h3>
+						<button type="button" id="agregarIdioma" class="btn-secundario">+ Agregar idioma</button>
+					</div>
+					<div id="listaIdiomas"></div>
+				</article>
+
+				<p id="errorFormacion" class="mensaje-error"></p>
+
+				<div class="acciones-formulario">
+					<button type="submit">Guardar y continuar</button>
+				</div>
+			</form>
+		</section>
+
+		<section id="resumenFormacion" style="display:none">
+			<h2>Resumen - Formación Académica</h2>
+			<div id="contenidoResumenFormacion"></div>
+
+			<div class="acciones-formulario">
+				<button type="button" id="editarFormacion">Editar</button>
+				<button type="button" id="confirmarFormacion">Confirmar y seguir</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>DAFP - Línea gratuita: 018000917770</p>
+	</footer>
+
+	<script src="../js/data.js"></script>
+	<script src="../js/formacion-academica.js"></script>
+
+</body>
+</html>
