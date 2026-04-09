@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificación - Hoja de Vida</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Persona Natural</p>
+    </header>
+
+    <nav>
+        <span>Paso 5 de 5 — Certificación</span>
+    </nav>
+
+    <main>
+        <section id="certificacion">
+            <h2>5. Firma del Servidor Público o Contratista</h2>
+
+            <div class="campo">
+                <p>
+                    Manifiesto bajo la gravedad del juramento que:
+                </p>
+                <label>
+                    <input type="radio" name="inhabilitado" value="SI">
+                    SÍ me encuentro dentro de las causales de inhabilidad e incompatibilidad
+                    del orden constitucional o legal, para ejercer cargos empleos públicos
+                    o para celebrar contratos de prestación de servicios con la administración pública.
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="inhabilitado" value="NO">
+                    NO me encuentro dentro de las causales de inhabilidad e incompatibilidad.
+                </label>
+            </div>
+
+            <div class="campo">
+                <label>
+                    <input type="checkbox" id="confirmaDatos">
+                    Certifico que los datos por mí anotados en el presente Formato Único
+                    de Hoja de Vida son veraces, (Artículo 5o. de la Ley 190/95).
+                </label>
+            </div>
+
+            <div class="campo">
+                <label for="nombreFirma">Nombre completo (firma) *</label>
+                <input type="text" id="nombreFirma" placeholder="Ingrese su nombre completo">
+            </div>
+
+            <p id="errorCertificacion" style="color:red"></p>
+            <button onclick="enviarHojaDeVida()">Enviar Hoja de Vida</button>
+        </section>
+
+        <!-- Confirmación final -->
+        <section id="confirmacionFinal" style="display:none">
+            <h2> Hoja de Vida Enviada</h2>
+            <p>Su hoja de vida ha sido registrada exitosamente.</p>
+            <p><strong>Estado actual:</strong> <span id="estadoActual">Diligenciada</span></p>
+            <button onclick="verEstado()">Consultar Estado</button>
+        </section>
+
+        <!-- Estado de la hoja de vida -->
+        <section id="seccionEstado" style="display:none">
+            <h2>Estado de su Hoja de Vida</h2>
+            <div id="contenidoEstado"></div>
+            <button onclick="volverInicio()">Volver al Inicio</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>DAFP — Línea gratuita: 018000917770</p>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/validations.js"></script>
+    <script src="../js/certificacion.js"></script>
+
+</body>
+</html>

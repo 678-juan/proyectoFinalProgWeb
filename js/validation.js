@@ -54,3 +54,15 @@ function validarExperienciaLaboral() {
 
     return null;
 }
+
+function validarCertificacion() {
+    const inhabilitado = document.querySelector('input[name="inhabilitado"]:checked');
+    const confirmaDatos = document.getElementById("confirmaDatos").checked;
+    const nombreFirma = document.getElementById("nombreFirma").value.trim();
+
+    if (!inhabilitado) return "Debe indicar si se encuentra inhabilitado o no";
+    if (!confirmaDatos) return "Debe certificar que los datos son verídicos";
+    if (!nombreFirma) return "Ingrese su nombre completo para firmar";
+
+    return null;
+}

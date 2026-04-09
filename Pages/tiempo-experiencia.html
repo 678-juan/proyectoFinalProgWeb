@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiempo de Experiencia - Hoja de Vida</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Persona Natural</p>
+    </header>
+
+    <nav>
+        <span>Paso 4 de 5 — Tiempo Total de Experiencia</span>
+    </nav>
+
+    <main>
+        <section id="tiempo-experiencia">
+            <h2>4. Tiempo Total de Experiencia</h2>
+            <p>El tiempo se calcula automáticamente desde sus experiencias laborales registradas.</p>
+
+            <table id="tablaExperiencia">
+                <thead>
+                    <tr>
+                        <th>Ocupación</th>
+                        <th>Años</th>
+                        <th>Meses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Servidor Público</td>
+                        <td><input type="number" id="aniosPublico" min="0" value="0"></td>
+                        <td><input type="number" id="mesesPublico" min="0" max="11" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Empleado Sector Privado</td>
+                        <td><input type="number" id="aniosPrivado" min="0" value="0"></td>
+                        <td><input type="number" id="mesesPrivado" min="0" max="11" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Trabajador Independiente</td>
+                        <td><input type="number" id="aniosIndependiente" min="0" value="0"></td>
+                        <td><input type="number" id="mesesIndependiente" min="0" max="11" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><span id="totalAnios">0</span></td>
+                        <td><span id="totalMeses">0</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p id="errorTiempo" style="color:red"></p>
+            <button onclick="verResumenTiempo()">Vista Previa</button>
+        </section>
+
+        <section id="resumenTiempo" style="display:none">
+            <h2>Resumen — Tiempo de Experiencia</h2>
+            <div id="contenidoResumenTiempo"></div>
+            <button onclick="editarTiempo()">Editar</button>
+            <button onclick="continuarTiempo()">Contin
