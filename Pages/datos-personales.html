@@ -12,127 +12,123 @@
         <p>Persona Natural</p>
     </header>
 
-    <nav>
-        <span>Paso 1 de 5 — Datos Personales</span>
-    </nav>
+    <div class="layout">
+        <div id="sidebar"></div>
+        <main>
+            <section id="datos-personales">
+                <h2>1. Datos Personales</h2>
 
-    <main>
-        <section id="datos-personales">
-            <h2>1. Datos Personales</h2>
-
-            <!-- Nombres y apellidos -->
-            <div class="campo">
-                <label for="primerApellido">Primer Apellido *</label>
-                <input type="text" id="primerApellido">
-            </div>
-
-            <div class="campo">
-                <label for="segundoApellido">Segundo Apellido</label>
-                <input type="text" id="segundoApellido">
-            </div>
-
-            <div class="campo">
-                <label for="nombres">Nombres *</label>
-                <input type="text" id="nombres">
-            </div>
-
-            <!-- Documento -->
-            <div class="campo">
-                <label for="tipoDocumento">Tipo de Documento *</label>
-                <select id="tipoDocumento"></select>
-            </div>
-
-            <div class="campo">
-                <label for="numeroDocumento">Número de Documento *</label>
-                <input type="text" id="numeroDocumento">
-            </div>
-
-            <!-- Sexo y nacionalidad -->
-            <div class="campo">
-                <label>Sexo *</label>
-                <label><input type="radio" name="sexo" value="F"> F</label>
-                <label><input type="radio" name="sexo" value="M"> M</label>
-            </div>
-
-            <div class="campo">
-                <label>Nacionalidad *</label>
-                <label><input type="radio" name="nacionalidad" value="COL"> Colombiano</label>
-                <label><input type="radio" name="nacionalidad" value="EXTRANJERO"> Extranjero</label>
-            </div>
-
-            <!-- Libreta militar (solo hombres) -->
-            <div class="campo" id="seccionLibreta" style="display:none">
-                <label>Libreta Militar</label>
-                <label><input type="radio" name="claseLibreta" value="PRIMERA"> Primera Clase</label>
-                <label><input type="radio" name="claseLibreta" value="SEGUNDA"> Segunda Clase</label>
+                <!-- Nombres y apellidos -->
                 <div class="campo">
-                    <label for="numeroLibreta">Número</label>
-                    <input type="text" id="numeroLibreta">
+                    <label for="primerApellido">Primer Apellido *</label>
+                    <input type="text" id="primerApellido">
                 </div>
-            </div>
 
-            <!-- Fecha y lugar de nacimiento -->
-            <div class="campo">
-                <label for="fechaNacimiento">Fecha de Nacimiento *</label>
-                <input type="date" id="fechaNacimiento">
-            </div>
+                <div class="campo">
+                    <label for="segundoApellido">Segundo Apellido</label>
+                    <input type="text" id="segundoApellido">
+                </div>
 
-            <div class="campo">
-                <label for="paisNacimiento">País de Nacimiento *</label>
-                <select id="paisNacimiento"></select>
-            </div>
+                <div class="campo">
+                    <label for="nombres">Nombres *</label>
+                    <input type="text" id="nombres">
+                </div>
 
-            <div class="campo">
-                <label for="deptoNacimiento">Departamento de Nacimiento *</label>
-                <select id="deptoNacimiento"></select>
-            </div>
+                <!-- Documento -->
+                <div class="campo">
+                    <label for="tipoDocumento">Tipo de Documento *</label>
+                    <select id="tipoDocumento"></select>
+                </div>
 
-            <div class="campo">
-                <label for="municipioNacimiento">Municipio de Nacimiento *</label>
-                <select id="municipioNacimiento"></select>
-            </div>
+                <div class="campo">
+                    <label for="numeroDocumento">Número de Documento *</label>
+                    <input type="text" id="numeroDocumento">
+                </div>
 
-            <!-- Dirección de correspondencia -->
-            <div class="campo">
-                <label for="paisCorrespondencia">País de Correspondencia *</label>
-                <select id="paisCorrespondencia"></select>
-            </div>
+                <!-- Sexo y nacionalidad -->
+                <div class="campo">
+                    <label>Sexo *</label>
+                    <label><input type="radio" name="sexo" value="F"> F</label>
+                    <label><input type="radio" name="sexo" value="M"> M</label>
+                </div>
 
-            <div class="campo">
-                <label for="deptoCorrespondencia">Departamento *</label>
-                <select id="deptoCorrespondencia"></select>
-            </div>
+                <div class="campo">
+                    <label>Nacionalidad *</label>
+                    <label><input type="radio" name="nacionalidad" value="COL"> Colombiano</label>
+                    <label><input type="radio" name="nacionalidad" value="EXTRANJERO"> Extranjero</label>
+                </div>
 
-            <div class="campo">
-                <label for="municipioCorrespondencia">Municipio *</label>
-                <select id="municipioCorrespondencia"></select>
-            </div>
+                <!-- Libreta militar (solo hombres) -->
+                <div class="campo" id="seccionLibreta" style="display:none">
+                    <label>Libreta Militar</label>
+                    <label><input type="radio" name="claseLibreta" value="PRIMERA"> Primera Clase</label>
+                    <label><input type="radio" name="claseLibreta" value="SEGUNDA"> Segunda Clase</label>
+                    <div class="campo">
+                        <label for="numeroLibreta">Número</label>
+                        <input type="text" id="numeroLibreta">
+                    </div>
+                </div>
 
-            <div class="campo">
-                <label for="telefono">Teléfono *</label>
-                <input type="text" id="telefono">
-            </div>
+                <!-- Fecha y lugar de nacimiento -->
+                <div class="campo">
+                    <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                    <input type="date" id="fechaNacimiento">
+                </div>
 
-            <div class="campo">
-                <label for="email">Email</label>
-                <input type="email" id="email">
-            </div>
+                <div class="campo">
+                    <label for="paisNacimiento">País de Nacimiento *</label>
+                    <select id="paisNacimiento"></select>
+                </div>
 
-            <p id="errorDatos" style="color:red"></p>
+                <div class="campo">
+                    <label for="deptoNacimiento">Departamento de Nacimiento *</label>
+                    <select id="deptoNacimiento"></select>
+                </div>
 
-            <button onclick="verResumen()">Vista Previa</button>
+                <div class="campo">
+                    <label for="municipioNacimiento">Municipio de Nacimiento *</label>
+                    <select id="municipioNacimiento"></select>
+                </div>
 
-        </section>
+                <!-- Dirección de correspondencia -->
+                <div class="campo">
+                    <label for="paisCorrespondencia">País de Correspondencia *</label>
+                    <select id="paisCorrespondencia"></select>
+                </div>
 
-        <!-- Resumen antes de continuar -->
-        <section id="resumen" style="display:none">
-            <h2>Resumen — Datos Personales</h2>
-            <div id="contenidoResumen"></div>
-            <button onclick="editarDatos()">Editar</button>
-            <button onclick="continuar()">Continuar →</button>
-        </section>
+                <div class="campo">
+                    <label for="deptoCorrespondencia">Departamento *</label>
+                    <select id="deptoCorrespondencia"></select>
+                </div>
 
-    </main>
+                <div class="campo">
+                    <label for="municipioCorrespondencia">Municipio *</label>
+                    <select id="municipioCorrespondencia"></select>
+                </div>
+
+                <div class="campo">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="text" id="telefono">
+                </div>
+
+                <div class="campo">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+
+                <p id="errorDatos"></p>
+                <button onclick="verResumen()">Vista Previa</button>
+            </section>
+
+            <!-- Resumen antes de continuar -->
+            <section id="resumen" style="display:none">
+                <h2>Resumen — Datos Personales</h2>
+                <div id="contenidoResumen"></div>
+                <button onclick="editarDatos()">Editar</button>
+                <button onclick="continuar()">Continuar →</button>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <p>DAFP — Línea gratuita: 018000917770</p>
@@ -140,6 +136,7 @@
 
     <script src="../js/data.js"></script>
     <script src="../js/validations.js"></script>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/datos-personales.js"></script>
 
 </body>

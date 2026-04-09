@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrador - Hoja de Vida</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Panel de Administrador</p>
+    </header>
+
+    <nav class="nav-admin">
+        <span>Panel Administrador</span>
+        <button onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+    </nav>
+
+    <div class="layout">
+        <main>
+
+            <!-- Filtros -->
+            <section id="filtros">
+                <h2>Hojas de Vida</h2>
+
+                <div class="campo">
+                    <label for="filtroEstado">Filtrar por estado</label>
+                    <select id="filtroEstado" onchange="filtrarHojas()">
+                        <option value="TODAS">Todas</option>
+                        <option value="Diligenciada">Diligenciada</option>
+                        <option value="Aceptada">Aceptada</option>
+                        <option value="Rechazada">Rechazada</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Lista de hojas de vida -->
+            <section id="listaHojas">
+                <div id="contenidoLista"></div>
+            </section>
+
+            <!-- Detalle de una hoja de vida -->
+            <section id="detalleHoja" style="display:none">
+                <h2>Detalle Hoja de Vida</h2>
+                <div id="contenidoDetalle"></div>
+
+                <h3>Cambiar Estado</h3>
+                <div class="campo">
+                    <label for="nuevoEstado">Estado</label>
+                    <select id="nuevoEstado">
+                        <option value="Diligenciada">Diligenciada</option>
+                        <option value="Aceptada">Aceptada</option>
+                        <option value="Rechazada">Rechazada</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="observaciones">6. Observaciones del Jefe de Recursos Humanos</label>
+                    <textarea id="observaciones" rows="4"
+                        placeholder="Ingrese observaciones..."></textarea>
+                </div>
+
+                <button onclick="guardarCambios()">Guardar Cambios</button>
+                <button onclick="volverLista()">← Volver</button>
+
+                <p id="mensajeAdmin"></p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>DAFP — Línea gratuita: 018000917770</p>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formación Académica - Hoja de Vida</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Persona Natural</p>
+    </header>
+
+    <div class="layout">
+        <div id="sidebar"></div>
+        <main>
+            <section id="formacion-academica">
+                <h2>2. Formación Académica</h2>
+
+                <!-- Educación básica y media -->
+                <h3>Educación Básica y Media</h3>
+                <div class="campo">
+                    <label for="ultimoGrado">Último grado aprobado *</label>
+                    <select id="ultimoGrado"></select>
+                </div>
+
+                <div class="campo">
+                    <label for="tituloObtenido">Título Obtenido</label>
+                    <input type="text" id="tituloObtenido">
+                </div>
+
+                <div class="campo">
+                    <label for="mesGrado">Mes de Grado</label>
+                    <input type="number" id="mesGrado" min="1" max="12" placeholder="MM">
+                </div>
+
+                <div class="campo">
+                    <label for="anioGrado">Año de Grado</label>
+                    <input type="number" id="anioGrado" min="1950" max="2030" placeholder="AAAA">
+                </div>
+
+                <!-- Educación superior -->
+                <h3>Educación Superior</h3>
+                <div id="listaEstudios"></div>
+                <button onclick="agregarEstudio()">+ Agregar Estudio</button>
+
+                <!-- Idiomas -->
+                <h3>Idiomas</h3>
+                <div id="listaIdiomas"></div>
+                <button onclick="agregarIdioma()">+ Agregar Idioma</button>
+
+                <p id="errorFormacion"></p>
+                <button onclick="verResumenFormacion()">Vista Previa</button>
+            </section>
+
+            <section id="resumenFormacion" style="display:none">
+                <h2>Resumen — Formación Académica</h2>
+                <div id="contenidoResumenFormacion"></div>
+                <button onclick="editarFormacion()">Editar</button>
+                <button onclick="continuarFormacion()">Continuar →</button>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>DAFP — Línea gratuita: 018000917770</p>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/validations.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/formacion-academica.js"></script>
+
+</body>
+</html>
