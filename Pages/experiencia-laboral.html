@@ -12,29 +12,28 @@
         <p>Persona Natural</p>
     </header>
 
-    <nav>
-        <span>Paso 3 de 5 — Experiencia Laboral</span>
-    </nav>
+    <div class="layout">
+        <div id="sidebar"></div>
+        <main>
+            <section id="experiencia-laboral">
+                <h2>3. Experiencia Laboral</h2>
+                <p>Registre su experiencia en orden cronológico comenzando por la más reciente.</p>
 
-    <main>
-        <section id="experiencia-laboral">
-            <h2>3. Experiencia Laboral</h2>
-            <p>Registre su experiencia en orden cronológico comenzando por la más reciente.</p>
+                <div id="listaExperiencias"></div>
+                <button onclick="agregarExperiencia()">+ Agregar Experiencia</button>
 
-            <div id="listaExperiencias"></div>
-            <button onclick="agregarExperiencia()">+ Agregar Experiencia</button>
+                <p id="errorExperiencia"></p>
+                <button onclick="verResumenExperiencia()">Vista Previa</button>
+            </section>
 
-            <p id="errorExperiencia" style="color:red"></p>
-            <button onclick="verResumenExperiencia()">Vista Previa</button>
-        </section>
-
-        <section id="resumenExperiencia" style="display:none">
-            <h2>Resumen — Experiencia Laboral</h2>
-            <div id="contenidoResumenExperiencia"></div>
-            <button onclick="editarExperiencia()">Editar</button>
-            <button onclick="continuarExperiencia()">Continuar →</button>
-        </section>
-    </main>
+            <section id="resumenExperiencia" style="display:none">
+                <h2>Resumen — Experiencia Laboral</h2>
+                <div id="contenidoResumenExperiencia"></div>
+                <button onclick="editarExperiencia()">Editar</button>
+                <button onclick="continuarExperiencia()">Continuar →</button>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <p>DAFP — Línea gratuita: 018000917770</p>
@@ -42,6 +41,7 @@
 
     <script src="../js/data.js"></script>
     <script src="../js/validations.js"></script>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/experiencia-laboral.js"></script>
 
 </body>
