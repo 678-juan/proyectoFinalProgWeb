@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const sesion = JSON.parse(localStorage.getItem("sesion"));
-    const paginaActual = window.locationpathname;
+    const paginaActual = window.location.pathname || "";
 
     const pasos = [{ nombre: "Datos Personales", url: "datos-personales.html", icono: "👤" },
         { nombre: "Formación Académica", url: "formacion-academica.html", icono: "🎓" },
@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
         { nombre: "Certificación", url: "certificacion.html", icono: "✅" }]
 
         //Construccion de items del sidebar
-        let items = pasos.map(function(paso){
-            const esActual = paginaActual.includes(paso.url);
+        let itemsPasos = pasos.map(function(paso){
+            const esActual = paginaActual ? paginaActual.includes(paso.url) : false;
             const claseActual = esActual ? "sidebar-item-activo" : "sidebar-item";
             return `
             <li class="${claseActual}">

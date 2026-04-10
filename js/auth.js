@@ -1,11 +1,11 @@
 // Logica de autenticación
 const users = [
-    { username: "admin", password: "admin123" },
-    { username: "user1", password: "123" }
+    { username: "admin", password: "admin123", rol: "administrador" },
+    { username: "user1", password: "123", rol: "usuario" }
 ];
 
-function login(username, password) {
-    const inputUsername = document.getElementById("username").value;
+function login() {
+    const inputUsername = document.getElementById("usuario").value;
     const inputPassword = document.getElementById("password").value;
 
     const encontrado = users.find(function(u){
@@ -14,15 +14,15 @@ function login(username, password) {
 
     if (encontrado) {
         // Autenticación exitosa
-        localStorage.setItem("loggedInUser", encontrado.username, JSON.stringify(encontrado));
+        localStorage.setItem("sesion", JSON.stringify(encontrado));
     
-        if(encontrado.username === "administrador"){
+        if(encontrado.rol === "administrador"){
             window.location.href = "Pages/admin.html";
         }else{
             window.location.href = "Pages/datos-personales.html";
         }
     }else {
         // Autenticación fallida
-        document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
+        document.getElementById("error").textContent = "Usuario o contraseña incorrectos.";
     }
 }
