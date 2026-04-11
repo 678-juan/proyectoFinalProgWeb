@@ -1,0 +1,15 @@
+.bloque-estudio,
+.bloque-idioma,
+.bloque-experiencia {
+    background: var(--gris-claro);
+    border: 0.5px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bloque-estudio hr,
+.bloque-idioma hr,
+.bloque-experiencia hr {
+    display: none;
+}
