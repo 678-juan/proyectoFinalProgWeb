@@ -44,6 +44,17 @@ function calcularDesdeExperiencia() {
     calcularTotal();
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    if(!datosPersonales || !datosPersonales.nombres){
+        alert("Por favor completa tus datos personales antes de continuar con el tiempo de experiencia.");
+        window.location.href = "datos-personales.html";
+        return;
+    }
+    calcularDesdeExperiencia();
+    escucharCambios();
+});
+
 function calcularTotal(){
 
     const aniosPublico = parseInt(document.getElementById("aniosPublico").value) || 0;

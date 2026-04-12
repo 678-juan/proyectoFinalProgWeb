@@ -1,0 +1,230 @@
+/* Variables */
+:root {
+    --azul: #185FA5;
+    --azul-claro: #E6F1FB;
+    --azul-hover: #0C447C;
+    --verde: #1D9E75;
+    --gris-claro: #F1EFE8;
+    --gris-borde: #D3D1C7;
+    --texto: #2C2C2A;
+    --texto-secundario: #5F5E5A;
+    --blanco: #ffffff;
+    --rojo: #E24B4A;
+    --sidebar-ancho: 240px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    color: var(--texto);
+    background: var(--gris-claro);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+header {
+    background: var(--azul);
+    color: var(--blanco);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header h1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.layout {
+    display: flex;
+    flex: 1;
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+section {
+    background: var(--blanco);
+    border: 0.5px solid var(--gris-borde);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--azul);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--gris-borde);
+}
+
+section h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--texto);
+    margin: 1.5rem 0 1rem;
+}
+
+section h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    margin-bottom: 0.75rem;
+}
+
+.campo {
+    margin-bottom: 1rem;
+}
+
+.campo label {
+    display: block;
+    font-size: 13px;
+    color: var(--texto-secundario);
+    margin-bottom: 4px;
+}
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="password"],
+.campo input[type="number"],
+.campo input[type="date"],
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 0.5px solid var(--gris-borde);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--texto);
+    background: var(--blanco);
+    transition: border 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: var(--azul);
+}
+
+.campo input[type="radio"],
+.campo input[type="checkbox"] {
+    margin-right: 6px;
+    accent-color: var(--azul);
+}
+
+button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border: 0.5px solid var(--gris-borde);
+    background: var(--blanco);
+    color: var(--texto);
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+button:hover {
+    background: var(--gris-claro);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button.primario,
+button[onclick="login()"],
+button[onclick="enviarHojaDeVida()"],
+button[onclick="continuarTiempo()"],
+button[onclick="continuarFormacion()"],
+button[onclick="continuarExperiencia()"],
+button[onclick="continuar()"] {
+    background: var(--azul);
+    color: var(--blanco);
+    border-color: var(--azul);
+}
+
+button.primario:hover,
+button[onclick="login()"]:hover {
+    background: var(--azul-hover);
+}
+
+button[onclick*="eliminarBloque"] {
+    background: transparent;
+    color: var(--rojo);
+    border-color: transparent;
+    font-size: 13px;
+    padding: 0.3rem 0.6rem;
+}
+
+button[onclick*="eliminarBloque"]:hover {
+    background: #FCEBEB;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 1rem;
+}
+
+th {
+    background: var(--azul-claro);
+    color: var(--azul);
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 0.5px solid var(--gris-borde);
+    color: var(--texto);
+}
+
+tr:hover td {
+    background: var(--gris-claro);
+}
+
+p[id*="error"] {
+    color: var(--rojo);
+    font-size: 13px;
+    margin-top: 0.5rem;
+}
+
+p[id*="mensaje"] {
+    color: var(--verde);
+    font-size: 13px;
+    margin-top: 0.5rem;
+}
+
+footer {
+    background: var(--blanco);
+    border-top: 0.5px solid var(--gris-borde);
+    padding: 1rem 2rem;
+    font-size: 12px;
+    color: var(--texto-secundario);
+    text-align: center;
+}

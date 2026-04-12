@@ -1,13 +1,21 @@
-function enviarHojaDeVida(){
+document.addEventListener("DOMContentLoaded", function() {
+    const tiempo = JSON.parse(localStorage.getItem("tiempoExperiencia"));
+    if (!tiempo) {
+        alert("Por favor completa tu tiempo de experiencia antes de continuar con la certificación.");
+        window.location.href = "tiempo-experiencia.html";
+        return;
+    }
+});
+
+function enviarHojaDeVida() {
     const error = validarCertificacion();
-    if(error){
+    if (error) {
         document.getElementById("errorCertificacion").innerText = error;
         return;
     }
 
-    // devuelve el objeto completo de la hoja de vida
     const hojaDeVida = {
-        id: Date.now(), // ID único basado en timestamp
+        id: Date.now(),
         estado: "Diligenciada",
         fechaEnvio: new Date().toLocaleDateString("es-CO"),
         inhabilitado: document.querySelector('input[name="inhabilitado"]:checked').value,
@@ -18,62 +26,49 @@ function enviarHojaDeVida(){
         tiempoExperiencia: JSON.parse(localStorage.getItem("tiempoExperiencia")) || {}
     };
 
-    // Guarda en el arreglo de hojas de vida que tiene el admin
     const hojas = JSON.parse(localStorage.getItem("hojasDeVida")) || [];
     hojas.push(hojaDeVida);
     localStorage.setItem("hojasDeVida", JSON.stringify(hojas));
+    localStorage.setItem("miHojaId", hojaDeVida.id);
 
-    // Guarda el id de la hoja de vida actual para consultar su info despues
-    localStorage.setItem("ultimaHojaDeVida", hojaDeVida.id);
-
-    // Muestra la confirmación
-    document.getElementById("certificacionForm").style.display = "none";
+    document.getElementById("certificacion").style.display = "none";
     document.getElementById("confirmacionFinal").style.display = "block";
 }
 
-function verEstado(){
+function verEstado() {
     const miId = localStorage.getItem("miHojaId");
     const hojas = JSON.parse(localStorage.getItem("hojasDeVida")) || [];
-    const miHoja = hojas.find(function(h){
+    const miHoja = hojas.find(function(h) {
         return h.id == miId;
     });
 
-    if (!miHoja){
-        document.getElementById("contenidoEstado").innerText =
-             "<p>No se encontró su hoja de vida.</p>";
+    if (!miHoja) {
+        document.getElementById("contenidoEstado").innerHTML = "<p>No se encontró su hoja de vida.</p>";
         return;
     }
-    
-    // Define el color segun el estado
-    let colorEstado = "";
-    if(miHoja.estado === "ACEPTADA"){
-        colorEstado = "green";
-    } else if(miHoja.estado === "RECHAZADA"){
-        color = "red";
-    }
 
-    document.getElementById("contenidoEstado").innerHTML = 
-    `
+    let colorEstado = "orange";
+    if (miHoja.estado === "Aceptada") colorEstado = "green";
+    else if (miHoja.estado === "Rechazada") colorEstado = "red";
+
+    document.getElementById("contenidoEstado").innerHTML = `
         <p><strong>Nombre:</strong> ${miHoja.nombreFirma}</p>
         <p><strong>Fecha de envío:</strong> ${miHoja.fechaEnvio}</p>
-        <p><strong>Estado:</strong> 
+        <p><strong>Estado:</strong>
             <span style="color:${colorEstado}; font-weight:bold">
                 ${miHoja.estado}
             </span>
         </p>
     `;
 
-    document.getElementById("confirmacionActual").style.display = "none";
-    document.getElementById("seccionEsatdo").style.display = "block";
-
+    document.getElementById("confirmacionFinal").style.display = "none";
+    document.getElementById("seccionEstado").style.display = "block";
 }
 
-function volverAlInicio(){
-    // Limpia todos los localStorage
+function volverAlInicio() {
     localStorage.removeItem("datosPersonales");
     localStorage.removeItem("formacionAcademica");
     localStorage.removeItem("experienciaLaboral");
     localStorage.removeItem("tiempoExperiencia");
-
     window.location.href = "../index.html";
 }

@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Datos Personales - Hoja de Vida</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
     <header>
@@ -20,7 +25,7 @@
 
                 <!-- Nombres y apellidos -->
                 <div class="campo">
-                    <label for="primerApellido">Primer Apellido *</label>
+                    <label for="primerApellido">Primer Apellido </label>
                     <input type="text" id="primerApellido">
                 </div>
 
@@ -30,30 +35,30 @@
                 </div>
 
                 <div class="campo">
-                    <label for="nombres">Nombres *</label>
+                    <label for="nombres">Nombres </label>
                     <input type="text" id="nombres">
                 </div>
 
                 <!-- Documento -->
                 <div class="campo">
-                    <label for="tipoDocumento">Tipo de Documento *</label>
+                    <label for="tipoDocumento">Tipo de Documento </label>
                     <select id="tipoDocumento"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="numeroDocumento">Número de Documento *</label>
+                    <label for="numeroDocumento">Número de Documento </label>
                     <input type="text" id="numeroDocumento">
                 </div>
 
                 <!-- Sexo y nacionalidad -->
                 <div class="campo">
-                    <label>Sexo *</label>
+                    <label>Sexo </label>
                     <label><input type="radio" name="sexo" value="F"> F</label>
                     <label><input type="radio" name="sexo" value="M"> M</label>
                 </div>
 
                 <div class="campo">
-                    <label>Nacionalidad *</label>
+                    <label>Nacionalidad </label>
                     <label><input type="radio" name="nacionalidad" value="COL"> Colombiano</label>
                     <label><input type="radio" name="nacionalidad" value="EXTRANJERO"> Extranjero</label>
                 </div>
@@ -71,43 +76,43 @@
 
                 <!-- Fecha y lugar de nacimiento -->
                 <div class="campo">
-                    <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                    <label for="fechaNacimiento">Fecha de Nacimiento </label>
                     <input type="date" id="fechaNacimiento">
                 </div>
 
                 <div class="campo">
-                    <label for="paisNacimiento">País de Nacimiento *</label>
+                    <label for="paisNacimiento">País de Nacimiento </label>
                     <select id="paisNacimiento"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="deptoNacimiento">Departamento de Nacimiento *</label>
+                    <label for="deptoNacimiento">Departamento de Nacimiento </label>
                     <select id="deptoNacimiento"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="municipioNacimiento">Municipio de Nacimiento *</label>
+                    <label for="municipioNacimiento">Municipio de Nacimiento </label>
                     <select id="municipioNacimiento"></select>
                 </div>
 
                 <!-- Dirección de correspondencia -->
                 <div class="campo">
-                    <label for="paisCorrespondencia">País de Correspondencia *</label>
+                    <label for="paisCorrespondencia">País </label>
                     <select id="paisCorrespondencia"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="deptoCorrespondencia">Departamento *</label>
+                    <label for="deptoCorrespondencia">Departamento </label>
                     <select id="deptoCorrespondencia"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="municipioCorrespondencia">Municipio *</label>
+                    <label for="municipioCorrespondencia">Municipio </label>
                     <select id="municipioCorrespondencia"></select>
                 </div>
 
                 <div class="campo">
-                    <label for="telefono">Teléfono *</label>
+                    <label for="telefono">Teléfono </label>
                     <input type="text" id="telefono">
                 </div>
 
@@ -140,4 +145,5 @@
     <script src="../js/datos-personales.js"></script>
 
 </body>
+
 </html>
