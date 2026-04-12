@@ -1,6 +1,6 @@
 let constadorExperiencias = 0;
 
-function agregarExperiencias(){
+function agregarExperiencia(){
     constadorExperiencias++;
     const id = constadorExperiencias;
     const contenedor = document.getElementById("listaExperiencias");
@@ -95,10 +95,10 @@ function agregarExperiencias(){
 
     // Municipios dinamicos
     document.getElementById("deptoExp-" + id).addEventListener("change", function() {
-        const municipios = municipiosPorDepartamento[this.value] || [];
+        const muns = municipios[this.value] || [];
         const selectMunicipio = document.getElementById("municipioExp-" + id);
         selectMunicipio.innerHTML = '<option value="">-- Seleccione --</option>';
-        municipios.forEach(function(m) {
+        muns.forEach(function(m) {
             const option = document.createElement("option");
             option.value = m;
             option.textContent = m;
@@ -107,7 +107,16 @@ function agregarExperiencias(){
     });
 }
 
-function eliminarBloque(id) {
+document.addEventListener("DOMContentLoaded", function(){
+    const formacion = JSON.parse(localStorage.getItem("formacionAcademica"));
+    if(!formacion || !formacion.ultimoGrado){
+        alert("Por favor completa tu formación académica antes de continuar con la experiencia laboral.");
+        window.location.href = "formacion-academica.html";
+        return;
+    }
+});
+
+function eliminarBloque(idBloque) {
     const bloque = document.getElementById(idBloque);
     if(bloque) bloque.remove();
 }

@@ -1,15 +1,20 @@
 let contadorEstudios = 0;
 let contadorIdiomas = 0;
 
-document.getElementById("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    if (!datosPersonales || !datosPersonales.nombres) {
+        alert("Por favor completa tus datos personales antes de continuar con la formación académica.");
+        window.location.href = "datos-personales.html";
+        return;
+    }
     cargarGrados();
 });
 
-// Llena el select del 1 al 11 grado
-function cargarGrados(){
+function cargarGrados() {
     const select = document.getElementById("ultimoGrado");
     select.innerHTML = '<option value="">-- Seleccione --</option>';
-    for(let i = 1; i <= 11; i++){
+    for (let i = 1; i <= 11; i++) {
         const option = document.createElement("option");
         option.value = i;
         option.textContent = "Grado " + i;
@@ -17,24 +22,20 @@ function cargarGrados(){
     }
 }
 
-// Agrega un nuevo campo de estudio
 function agregarEstudio() {
     contadorEstudios++;
     const id = contadorEstudios;
     const contenedor = document.getElementById("listaEstudios");
 
-    // Crea el div del estudio
     const div = document.createElement("div");
     div.classList.add("bloque-estudio");
     div.id = "estudio-" + id;
 
-    // Construye las opciones de modalidad desde data.js
     let opcionesModalidad = '<option value="">-- Seleccione --</option>';
     modalidadesAcademicas.forEach(function(m) {
         opcionesModalidad += `<option value="${m.codigo}">${m.nombre}</option>`;
     });
 
-    // Inserta el HTML del bloque
     div.innerHTML = `
         <h4>Estudio #${id}</h4>
 
@@ -81,8 +82,7 @@ function agregarEstudio() {
     contenedor.appendChild(div);
 }
 
-// Agregarun bloque de idioma nuevo
-function agregarIddioma(){
+function agregarIdioma() {
     contadorIdiomas++;
     const id = contadorIdiomas;
     const contenedor = document.getElementById("listaIdiomas");
@@ -91,13 +91,12 @@ function agregarIddioma(){
     div.classList.add("bloque-idioma");
     div.id = "idioma-" + id;
 
-    // Opciones de idiomas desde data.js
     let opcionesIdioma = '<option value="">-- Seleccione --</option>';
     idiomas.forEach(function(idioma) {
         opcionesIdioma += `<option value="${idioma}">${idioma}</option>`;
     });
 
-    div.innerHTML =  `
+    div.innerHTML = `
         <h4>Idioma #${id}</h4>
 
         <div class="campo">
@@ -142,15 +141,11 @@ function agregarIddioma(){
     contenedor.appendChild(div);
 }
 
-// Elimina el bloque por id
-function eliminarBloque(idBloque){
+function eliminarBloque(idBloque) {
     const bloque = document.getElementById(idBloque);
-    if (bloque) {
-        bloque.remove();
-    }
+    if (bloque) bloque.remove();
 }
 
-//Recolecta estudios del DOM
 function obtenerEstudios() {
     const estudios = [];
     const bloques = document.querySelectorAll(".bloque-estudio");
@@ -173,7 +168,6 @@ function obtenerEstudios() {
     return estudios;
 }
 
-// Reecolecta idiomas del DOM
 function obtenerIdiomas() {
     const listaIdiomas = [];
     const bloques = document.querySelectorAll(".bloque-idioma");
@@ -192,21 +186,21 @@ function obtenerIdiomas() {
     return listaIdiomas;
 }
 
-function verResumenFormacion(){
+function verResumenFormacion() {
     const error = validarFormacionAcademica();
-    if(error){
+    if (error) {
         document.getElementById("errorFormacion").textContent = error;
-        retturn;
+        return;
     }
 
     const estudios = obtenerEstudios();
-    const idiomas = obtenerIdiomas();
+    const listaIdiomas = obtenerIdiomas();
 
-    let htmlEstudios = estudios.map(function(e,i){
+    let htmlEstudios = estudios.map(function(e, i) {
         return `<p><strong>Estudio ${i + 1}:</strong> ${e.nombreEstudio} — ${e.modalidad} — Graduado: ${e.graduado}</p>`;
     }).join("");
 
-    let htmlIdiomas = listaIdiomas.map(function(i){
+    let htmlIdiomas = listaIdiomas.map(function(i) {
         return `<p><strong>${i.idioma}:</strong> Habla: ${i.habla || "-"} | Lee: ${i.lee || "-"} | Escribe: ${i.escribe || "-"}</p>`;
     }).join("");
 
@@ -224,12 +218,12 @@ function verResumenFormacion(){
     document.getElementById("resumenFormacion").style.display = "block";
 }
 
-function editarFormacion(){
+function editarFormacion() {
     document.getElementById("resumenFormacion").style.display = "none";
     document.getElementById("formacion-academica").style.display = "block";
 }
 
-function continuarFormacion(){
+function continuarFormacion() {
     const datos = {
         ultimoGrado: document.getElementById("ultimoGrado").value,
         tituloObtenido: document.getElementById("tituloObtenido").value,
@@ -242,4 +236,3 @@ function continuarFormacion(){
     localStorage.setItem("formacionAcademica", JSON.stringify(datos));
     window.location.href = "experiencia-laboral.html";
 }
-

@@ -43,6 +43,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--azul);
+    font-size: 14px;
 }
 
 .sidebar-nombreusuario {
@@ -87,9 +89,10 @@
 }
 
 .sidebar-icono {
-    font-size: 16px;
+    font-size: 14px;
     width: 20px;
     text-align: center;
+    color: inherit
 }
 
 .sidebar-footer {

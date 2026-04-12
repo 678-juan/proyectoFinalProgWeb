@@ -2,40 +2,42 @@ document.addEventListener("DOMContentLoaded", function() {
     const sesion = JSON.parse(localStorage.getItem("sesion"));
     const paginaActual = window.location.pathname || "";
 
-    const pasos = [{ nombre: "Datos Personales", url: "datos-personales.html", icono: "👤" },
-        { nombre: "Formación Académica", url: "formacion-academica.html", icono: "🎓" },
-        { nombre: "Experiencia Laboral", url: "experiencia-laboral.html", icono: "💼" },
-        { nombre: "Tiempo de Experiencia", url: "tiempo-experiencia.html", icono: "⏱" },
-        { nombre: "Certificación", url: "certificacion.html", icono: "✅" }]
+    const pasos = [
+        { nombre: "Datos Personales", url: "datos-personales.html", icono: "fa-solid fa-user" },
+        { nombre: "Formación Académica", url: "formacion-academica.html", icono: "fa-solid fa-graduation-cap" },
+        { nombre: "Experiencia Laboral", url: "experiencia-laboral.html", icono: "fa-solid fa-briefcase" },
+        { nombre: "Tiempo de Experiencia", url: "tiempo-experiencia.html", icono: "fa-solid fa-clock" },
+        { nombre: "Certificación", url: "certificacion.html", icono: "fa-solid fa-certificate" }
+    ];
 
-        //Construccion de items del sidebar
-        let itemsPasos = pasos.map(function(paso){
-            const esActual = paginaActual ? paginaActual.includes(paso.url) : false;
-            const claseActual = esActual ? "sidebar-item-activo" : "sidebar-item";
-            return `
+    let itemsPasos = pasos.map(function(paso) {
+        const esActual = paginaActual ? paginaActual.includes(paso.url) : false;
+        const claseActual = esActual ? "sidebar-item activo" : "sidebar-item";
+
+        return `
             <li class="${claseActual}">
                 <a href="${paso.url}">
-                    <span class="sidebar-icono">${paso.icono}</span>
+                    <i class="${paso.icono} sidebar-icono"></i>
                     <span class="sidebar-nombre">${paso.nombre}</span>
                 </a>
             </li>
         `;
-        }).join("");
+    }).join("");
 
-        //Nombre del usuario
-        const nombreUsuario = sesion ? sesion.nombre : "Invitado";
-        const rolUsuario = sesion ? sesion.rol : "";
+    const nombreUsuario = sesion ? sesion.username : "Invitado";
+    const rolUsuario = sesion ? sesion.rol : "";
 
-        document.getElementById("sidebar").innerHTML = `
+    document.getElementById("sidebar").innerHTML = `
         <aside class="sidebar">
-
             <div class="sidebar-header">
                 <h2 class="sidebar-titulo">Hoja de Vida</h2>
                 <p class="sidebar-subtitulo">Formato Único DAFP</p>
             </div>
 
             <div class="sidebar-usuario">
-                <span class="sidebar-avatar">👤</span>
+                <div class="sidebar-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
                 <div>
                     <p class="sidebar-nombreusuario">${nombreUsuario}</p>
                     <p class="sidebar-rol">${rolUsuario}</p>
@@ -48,10 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             <div class="sidebar-footer">
                 <button class="sidebar-logout" onclick="cerrarSesionSidebar()">
-                    🚪 Cerrar Sesión
+                    <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
                 </button>
             </div>
-
         </aside>
     `;
 });

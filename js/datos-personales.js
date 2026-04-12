@@ -1,18 +1,18 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     cargarSelects();
 
-    document.getElementById("deptoNacimiento").addEventListener("change", function() {
-        const municipios = municipiosPorDepartamento[this.value] || [];
-        cargarSelect("municipioNacimiento", municipios);
+    document.getElementById("deptoNacimiento").addEventListener("change", function () {
+        const muns = municipios[this.value] || [];
+        cargarSelect("municipioNacimiento", muns);
     });
 
-    document.getElementById("deptoCorrespondencia").addEventListener("change", function() {
-        const municipios = municipiosPorDepartamento[this.value] || [];
-        cargarSelect("municipioCorrespondencia", municipios);
+    document.getElementById("deptoCorrespondencia").addEventListener("change", function () {
+        const muns = municipios[this.value] || [];
+        cargarSelect("municipioCorrespondencia", muns);
     });
 
-    document.querySelectorAll('input[name="sexo"]').forEach(function(radio) {
-        radio.addEventListener("change", function() {
+    document.querySelectorAll('input[name="sexo"]').forEach(function (radio) {
+        radio.addEventListener("change", function () {
             const seccion = document.getElementById("seccionLibreta");
             seccion.style.display = this.value === "M" ? "block" : "none";
         });
@@ -30,7 +30,7 @@ function cargarSelects() {
 function cargarSelect(idSelect, arrayDatos) {
     const select = document.getElementById(idSelect);
     select.innerHTML = "<option value=''>Seleccione...</option>";
-    arrayDatos.forEach(function(item) {
+    arrayDatos.forEach(function (item) {
         const option = document.createElement("option");
         option.value = typeof item === "object" ? item.codigo : item;
         option.textContent = typeof item === "object" ? item.nombre : item;
