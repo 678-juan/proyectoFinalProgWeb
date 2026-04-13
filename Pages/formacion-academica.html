@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Formación Académica - Hoja de Vida</title>
@@ -8,9 +7,7 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/formacion-academica.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
-
 <body>
 
     <header>
@@ -24,37 +21,46 @@
             <section id="formacion-academica">
                 <h2>2. Formación Académica</h2>
 
-                <!-- Educación básica y media -->
                 <h3>Educación Básica y Media</h3>
                 <div class="campo">
                     <label for="ultimoGrado">Último grado aprobado *</label>
                     <select id="ultimoGrado"></select>
                 </div>
 
-                <div class="campo">
-                    <label for="tituloObtenido">Título Obtenido</label>
-                    <input type="text" id="tituloObtenido">
-                </div>
-
-                <div class="campo">
+                <div class="campo" id="seccionMesGrado" style="display:none">
                     <label for="mesGrado">Mes de Grado</label>
-                    <input type="number" id="mesGrado" min="1" max="12" placeholder="MM">
+                    <select id="mesGrado">
+                        <option value="">-- Seleccione --</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
                 </div>
 
-                <div class="campo">
+                <div class="campo" id="seccionAnioGrado" style="display:none">
                     <label for="anioGrado">Año de Grado</label>
-                    <input type="number" id="anioGrado" min="1950" max="2030" placeholder="AAAA">
+                    <select id="anioGrado"></select>
                 </div>
 
-                <!-- Educación superior -->
-                <h3>Educación Superior</h3>
-                <div id="listaEstudios"></div>
-                <button onclick="agregarEstudio()">+ Agregar Estudio</button>
+                <!-- Sección superior oculta hasta grado 11 -->
+                <div id="seccionSuperior" style="display:none">
+                    <h3>Educación Superior</h3>
+                    <div id="listaEstudios"></div>
+                    <button onclick="agregarEstudio()">+ Agregar Estudio</button>
 
-                <!-- Idiomas -->
-                <h3>Idiomas</h3>
-                <div id="listaIdiomas"></div>
-                <button onclick="agregarIdioma()">+ Agregar Idioma</button>
+                    <h3>Idiomas</h3>
+                    <div id="listaIdiomas"></div>
+                    <button onclick="agregarIdioma()">+ Agregar Idioma</button>
+                </div>
 
                 <p id="errorFormacion"></p>
                 <button onclick="verResumenFormacion()">Vista Previa</button>
@@ -79,5 +85,4 @@
     <script src="../js/formacion-academica.js"></script>
 
 </body>
-
 </html>

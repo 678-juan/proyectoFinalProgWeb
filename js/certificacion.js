@@ -14,19 +14,33 @@ function enviarHojaDeVida() {
         return;
     }
 
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    const hojas = JSON.parse(localStorage.getItem("hojasDeVida")) || [];
+
+    const duplicado = hojas.find(function(h) {
+        return h.datosPersonales.numeroDocumento === datosPersonales.numeroDocumento;
+    });
+
+    if(duplicado){
+        document.getElementById("errorCertificacion").innerText = 
+            "Ya existe una hoja de vida registrada con este número de documento.";
+        return;
+    }
+
+
     const hojaDeVida = {
         id: Date.now(),
         estado: "Diligenciada",
         fechaEnvio: new Date().toLocaleDateString("es-CO"),
         inhabilitado: document.querySelector('input[name="inhabilitado"]:checked').value,
         nombreFirma: document.getElementById("nombreFirma").value.trim(),
-        datosPersonales: JSON.parse(localStorage.getItem("datosPersonales")) || {},
+        datosPersonales: datosPersonales,
         formacionAcademica: JSON.parse(localStorage.getItem("formacionAcademica")) || {},
         experienciaLaboral: JSON.parse(localStorage.getItem("experienciaLaboral")) || [],
         tiempoExperiencia: JSON.parse(localStorage.getItem("tiempoExperiencia")) || {}
     };
 
-    const hojas = JSON.parse(localStorage.getItem("hojasDeVida")) || [];
+    
     hojas.push(hojaDeVida);
     localStorage.setItem("hojasDeVida", JSON.stringify(hojas));
     localStorage.setItem("miHojaId", hojaDeVida.id);
@@ -66,9 +80,5 @@ function verEstado() {
 }
 
 function volverAlInicio() {
-    localStorage.removeItem("datosPersonales");
-    localStorage.removeItem("formacionAcademica");
-    localStorage.removeItem("experienciaLaboral");
-    localStorage.removeItem("tiempoExperiencia");
-    window.location.href = "../index.html";
+    window.location.href = "bienvenida.html";
 }

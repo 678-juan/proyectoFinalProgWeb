@@ -1,4 +1,4 @@
-function validarDatosPersonales(){
+function validarDatosPersonales() {
     const datos = obtenerDatos();
 
     const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
@@ -25,10 +25,8 @@ function validarDatosPersonales(){
     const hoy = new Date();
     const fechaNac = new Date(datos.fechaNacimiento);
 
-    // Valida que no sea futura
     if (fechaNac >= hoy) return "La fecha de nacimiento debe ser anterior a hoy";
 
-    // Calcula edad exacta considerando mes y día
     let edad = hoy.getFullYear() - fechaNac.getFullYear();
     const mesActual = hoy.getMonth();
     const mesNac = fechaNac.getMonth();
@@ -40,12 +38,20 @@ function validarDatosPersonales(){
     if (edad > 100) return "La fecha de nacimiento no es válida";
 
     if (!datos.paisNacimiento) return "Seleccione el país de nacimiento";
-    if (!datos.deptoNacimiento) return "Seleccione el departamento de nacimiento";
-    if (!datos.municipioNacimiento) return "Seleccione el municipio de nacimiento";
+    if (datos.paisNacimiento === "Colombia") {
+        if (!datos.deptoNacimiento) return "Seleccione el departamento de nacimiento";
+        if (!datos.municipioNacimiento) return "Seleccione el municipio de nacimiento";
+    } else {
+        if (!datos.regionNacimiento) return "Seleccione la región de nacimiento";
+    }
 
     if (!datos.paisCorrespondencia) return "Seleccione el país de correspondencia";
-    if (!datos.deptoCorrespondencia) return "Seleccione el departamento de correspondencia";
-    if (!datos.municipioCorrespondencia) return "Seleccione el municipio de correspondencia";
+    if (datos.paisCorrespondencia === "Colombia") {
+        if (!datos.deptoCorrespondencia) return "Seleccione el departamento de correspondencia";
+        if (!datos.municipioCorrespondencia) return "Seleccione el municipio de correspondencia";
+    } else {
+        if (!datos.regionCorrespondencia) return "Seleccione la región de correspondencia";
+    }
 
     if (!datos.telefono) return "El teléfono es obligatorio";
     if (!/^\d{7,15}$/.test(datos.telefono))
@@ -54,6 +60,36 @@ function validarDatosPersonales(){
     if (datos.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email))
         return "El email no tiene un formato válido";
 
+    const hojas = JSON.parse(localStorage.getItem("hojasDeVida")) || [];
+
+    const documentoDuplicado = hojas.find(function(h) {
+        return h.datosPersonales.numeroDocumento === datos.numeroDocumento;
+    });
+    if (documentoDuplicado) return "Ya existe una hoja de vida con este número de documento";
+
+    if (datos.email) {
+        const emailDuplicado = hojas.find(function(h) {
+            return h.datosPersonales.email === datos.email;
+        });
+        if (emailDuplicado) return "Ya existe una hoja de vida registrada con este email";
+    }
+
+    if (datos.sexo === "M") {
+        const numeroLibreta = document.getElementById("numeroLibreta").value.trim();
+        if (numeroLibreta) {
+            if (!/^\d{5,15}$/.test(numeroLibreta))
+                return "El número de libreta militar debe contener solo números entre 5 y 15 dígitos";
+
+            if (numeroLibreta === datos.numeroDocumento)
+                return "El número de libreta militar no puede ser igual al número de documento";
+
+            const libretaDuplicada = hojas.find(function(h) {
+                return h.datosPersonales.numeroLibreta === numeroLibreta;
+            });
+            if (libretaDuplicada) return "Ya existe una hoja de vida con este número de libreta militar";
+        }
+    }
+
     return null;
 }
 
@@ -61,7 +97,6 @@ function validarFormacionAcademica() {
     const ultimoGrado = document.getElementById("ultimoGrado").value;
     if (!ultimoGrado) return "Seleccione el último grado aprobado";
 
-    // Valida cada estudio agregado
     const bloques = document.querySelectorAll(".bloque-estudio");
     for (let i = 0; i < bloques.length; i++) {
         const id = bloques[i].id.split("-")[1];
@@ -86,11 +121,36 @@ function validarExperienciaLaboral() {
         const tipo = document.querySelector(`input[name="tipoEmpresa-${id}"]:checked`);
         const fechaIngreso = document.getElementById("fechaIngreso-" + id).value;
         const cargo = document.getElementById("cargo-" + id).value.trim();
+        const correo = document.getElementById("correoEntidad-" + id).value.trim();
 
         if (!empresa) return `Experiencia #${id}: ingrese el nombre de la empresa`;
         if (!tipo) return `Experiencia #${id}: seleccione si es pública o privada`;
         if (!fechaIngreso) return `Experiencia #${id}: ingrese la fecha de ingreso`;
         if (!cargo) return `Experiencia #${id}: ingrese el cargo`;
+
+        if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo))
+            return `Experiencia #${id}: el correo electrónico no tiene un formato válido`;
+
+        const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+        if (datosPersonales && fechaIngreso) {
+            const fechaNac = new Date(datosPersonales.fechaNacimiento);
+            const fechaIngresoDate = new Date(fechaIngreso);
+
+            if (fechaIngresoDate < fechaNac)
+                return `Experiencia #${id}: la fecha de ingreso no puede ser anterior a su fecha de nacimiento`;
+
+            let edadAlIngreso = fechaIngresoDate.getFullYear() - fechaNac.getFullYear();
+            const mes = fechaIngresoDate.getMonth() - fechaNac.getMonth();
+            if (mes < 0 || (mes === 0 && fechaIngresoDate.getDate() < fechaNac.getDate())) {
+                edadAlIngreso--;
+            }
+            if (edadAlIngreso < 18)
+                return `Experiencia #${id}: la fecha de ingreso indica que tenía menos de 18 años`;
+
+            const hoy = new Date();
+            if (fechaIngresoDate > hoy)
+                return `Experiencia #${id}: la fecha de ingreso no puede ser futura`;
+        }
     }
 
     return null;
@@ -104,6 +164,17 @@ function validarCertificacion() {
     if (!inhabilitado) return "Debe indicar si se encuentra inhabilitado o no";
     if (!confirmaDatos) return "Debe certificar que los datos son verídicos";
     if (!nombreFirma) return "Ingrese su nombre completo para firmar";
+
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    if (datosPersonales) {
+        const nombreCompleto = (datosPersonales.nombres + " " +
+                               datosPersonales.primerApellido + " " +
+                               (datosPersonales.segundoApellido || "")).trim().toLowerCase();
+        const firmaIngresada = nombreFirma.toLowerCase();
+        if (firmaIngresada !== nombreCompleto) {
+            return "El nombre ingresado para la firma no coincide con su nombre completo registrado";
+        }
+    }
 
     return null;
 }

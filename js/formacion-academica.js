@@ -8,7 +8,36 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "datos-personales.html";
         return;
     }
+
+    document.getElementById("listaEstudios").addEventListener("input", function(e) {
+        if (e.target.id && e.target.id.startsWith("nombreEstudio-")) {
+            e.target.value = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+        }
+        if (e.target.id && e.target.id.startsWith("tarjeta-")) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, "");
+        }
+    });
+
+    document.getElementById("ultimoGrado").addEventListener("change", function() {
+        const seccionMes = document.getElementById("seccionMesGrado");
+        const seccionAnio = document.getElementById("seccionAnioGrado");
+        const seccionSuperior = document.getElementById("seccionSuperior");
+
+        if (this.value == 11) {
+            seccionMes.style.display = "block";
+            seccionAnio.style.display = "block";
+            seccionSuperior.style.display = "block";
+        } else {
+            seccionMes.style.display = "none";
+            seccionAnio.style.display = "none";
+            seccionSuperior.style.display = "none";
+            document.getElementById("mesGrado").value = "";
+            document.getElementById("anioGrado").value = "";
+        }
+    });
+
     cargarGrados();
+    cargarAnios("anioGrado");
 });
 
 function cargarGrados() {
@@ -18,6 +47,18 @@ function cargarGrados() {
         const option = document.createElement("option");
         option.value = i;
         option.textContent = "Grado " + i;
+        select.appendChild(option);
+    }
+}
+
+function cargarAnios(idSelect) {
+    const select = document.getElementById(idSelect);
+    const anioActual = new Date().getFullYear();
+    select.innerHTML = '<option value="">-- Seleccione --</option>';
+    for (let anio = anioActual; anio >= 1950; anio--) {
+        const option = document.createElement("option");
+        option.value = anio;
+        option.textContent = anio;
         select.appendChild(option);
     }
 }
@@ -36,6 +77,19 @@ function agregarEstudio() {
         opcionesModalidad += `<option value="${m.codigo}">${m.nombre}</option>`;
     });
 
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let opcionesMeses = '<option value="">-- Seleccione --</option>';
+    meses.forEach(function(mes, i) {
+        opcionesMeses += `<option value="${i + 1}">${mes}</option>`;
+    });
+
+    const anioActual = new Date().getFullYear();
+    let opcionesAnios = '<option value="">-- Seleccione --</option>';
+    for (let anio = anioActual; anio >= 1950; anio--) {
+        opcionesAnios += `<option value="${anio}">${anio}</option>`;
+    }
+
     div.innerHTML = `
         <h4>Estudio #${id}</h4>
 
@@ -46,7 +100,12 @@ function agregarEstudio() {
 
         <div class="campo">
             <label>Número de Semestres Aprobados *</label>
-            <input type="number" id="semestres-${id}" min="1">
+            <select id="semestres-${id}">
+                <option value="">-- Seleccione --</option>
+                ${Array.from({length: 12}, function(_, i) {
+                    return `<option value="${i + 1}">${i + 1} semestre${i > 0 ? "s" : ""}</option>`;
+                }).join("")}
+            </select>
         </div>
 
         <div class="campo">
@@ -62,17 +121,17 @@ function agregarEstudio() {
 
         <div class="campo">
             <label>Mes de Terminación *</label>
-            <input type="number" id="mesTerminacion-${id}" min="1" max="12" placeholder="MM">
+            <select id="mesTerminacion-${id}">${opcionesMeses}</select>
         </div>
 
         <div class="campo">
             <label>Año de Terminación *</label>
-            <input type="number" id="anioTerminacion-${id}" min="1950" max="2030" placeholder="AAAA">
+            <select id="anioTerminacion-${id}">${opcionesAnios}</select>
         </div>
 
         <div class="campo">
             <label>No. Tarjeta Profesional</label>
-            <input type="text" id="tarjeta-${id}">
+            <input type="text" id="tarjeta-${id}" placeholder="Solo números">
         </div>
 
         <button onclick="eliminarBloque('estudio-${id}')">🗑 Eliminar</button>
@@ -101,7 +160,7 @@ function agregarIdioma() {
 
         <div class="campo">
             <label>Idioma *</label>
-            <select id="idioma-${id}">${opcionesIdioma}</select>
+            <select id="selectIdioma-${id}">${opcionesIdioma}</select>
         </div>
 
         <div class="campo">
@@ -176,7 +235,7 @@ function obtenerIdiomas() {
         const id = bloque.id.split("-")[1];
 
         listaIdiomas.push({
-            idioma: document.getElementById("idioma-" + id).value,
+            idioma: document.getElementById("selectIdioma-" + id).value,
             habla: document.getElementById("habla-" + id).value,
             lee: document.getElementById("lee-" + id).value,
             escribe: document.getElementById("escribe-" + id).value
@@ -200,14 +259,13 @@ function verResumenFormacion() {
         return `<p><strong>Estudio ${i + 1}:</strong> ${e.nombreEstudio} — ${e.modalidad} — Graduado: ${e.graduado}</p>`;
     }).join("");
 
-    let htmlIdiomas = listaIdiomas.map(function(i) {
-        return `<p><strong>${i.idioma}:</strong> Habla: ${i.habla || "-"} | Lee: ${i.lee || "-"} | Escribe: ${i.escribe || "-"}</p>`;
+    let htmlIdiomas = listaIdiomas.map(function(idioma) {
+        return `<p><strong>${idioma.idioma}:</strong> Habla: ${idioma.habla || "-"} | Lee: ${idioma.lee || "-"} | Escribe: ${idioma.escribe || "-"}</p>`;
     }).join("");
 
     document.getElementById("contenidoResumenFormacion").innerHTML = `
         <h3>Educación Básica</h3>
         <p><strong>Último grado:</strong> ${document.getElementById("ultimoGrado").value}</p>
-        <p><strong>Título:</strong> ${document.getElementById("tituloObtenido").value || "No especificado"}</p>
         <h3>Estudios Superiores</h3>
         ${htmlEstudios || "<p>Sin estudios superiores registrados</p>"}
         <h3>Idiomas</h3>
@@ -226,7 +284,6 @@ function editarFormacion() {
 function continuarFormacion() {
     const datos = {
         ultimoGrado: document.getElementById("ultimoGrado").value,
-        tituloObtenido: document.getElementById("tituloObtenido").value,
         mesGrado: document.getElementById("mesGrado").value,
         anioGrado: document.getElementById("anioGrado").value,
         estudios: obtenerEstudios(),

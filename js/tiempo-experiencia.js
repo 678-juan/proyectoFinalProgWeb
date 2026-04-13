@@ -1,62 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-    calcularDesdeExperiencia();
+document.addEventListener("DOMContentLoaded", function() {
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    if (!datosPersonales || !datosPersonales.nombres) {
+        alert("Por favor completa tus datos personales antes de continuar.");
+        window.location.href = "datos-personales.html";
+        return;
+    }
+    calcularDesdeExperiencias();
     escucharCambios();
 });
 
-// Calcula meses entre dos fechas
 function calcularMesesEntreFechas(fechaIngreso, fechaRetiro) {
-    const incio = new Date(fechaIngreso);
-    const fin = fechaRetiro ? new Date(fechaRetiro) : new Date(); // si no hay ningun retiro utiliza la fecha de hoy
+    const inicio = new Date(fechaIngreso);
+    const fin = fechaRetiro ? new Date(fechaRetiro) : new Date();
 
     const anios = fin.getFullYear() - inicio.getFullYear();
     const meses = fin.getMonth() - inicio.getMonth();
 
     return (anios * 12) + meses;
-
 }
 
-// Lee las experiencias del localStorage y precarga los campos
-function calcularDesdeExperiencia() {
-    const experiencias = JSON.parse(localStorage.getItem("experiencias")) || [];
+function calcularDesdeExperiencias() {
+    const experiencias = JSON.parse(localStorage.getItem("experienciaLaboral")) || [];
 
     let mesesPublico = 0;
     let mesesPrivado = 0;
 
-    experiencias.forEach(function (exp) {
-        if(!exp.fechaIngreso) return; // Si no hay fecha de ingreso, no se puede calcular
+    experiencias.forEach(function(exp) {
+        if (!exp.fechaIngreso) return;
 
         const meses = calcularMesesEntreFechas(exp.fechaIngreso, exp.fechaRetiro);
 
-        if(exp.tipo === "PUBLICO"){
+        if (exp.tipo === "PUBLICA") {
             mesesPublico += meses;
-        } else if (exp.tipo === "PRIVADO"){
+        } else if (exp.tipo === "PRIVADA") {
             mesesPrivado += meses;
         }
     });
 
-    // Convierte meses totales a años y meses
     document.getElementById("aniosPublico").value = Math.floor(mesesPublico / 12);
     document.getElementById("mesesPublico").value = mesesPublico % 12;
-
     document.getElementById("aniosPrivado").value = Math.floor(mesesPrivado / 12);
     document.getElementById("mesesPrivado").value = mesesPrivado % 12;
 
     calcularTotal();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
-    if(!datosPersonales || !datosPersonales.nombres){
-        alert("Por favor completa tus datos personales antes de continuar con el tiempo de experiencia.");
-        window.location.href = "datos-personales.html";
-        return;
-    }
-    calcularDesdeExperiencia();
-    escucharCambios();
-});
-
-function calcularTotal(){
-
+function calcularTotal() {
     const aniosPublico = parseInt(document.getElementById("aniosPublico").value) || 0;
     const mesesPublico = parseInt(document.getElementById("mesesPublico").value) || 0;
     const aniosPrivado = parseInt(document.getElementById("aniosPrivado").value) || 0;
@@ -64,22 +53,40 @@ function calcularTotal(){
     const aniosIndependiente = parseInt(document.getElementById("aniosIndependiente").value) || 0;
     const mesesIndependiente = parseInt(document.getElementById("mesesIndependiente").value) || 0;
 
-    // Suma todo en meses
-    const totalMesesBruto = 
-
+    const totalMesesBruto =
         (aniosPublico * 12) + mesesPublico +
         (aniosPrivado * 12) + mesesPrivado +
         (aniosIndependiente * 12) + mesesIndependiente;
 
-    // Convierte a años y meses
     const totalAnios = Math.floor(totalMesesBruto / 12);
     const totalMeses = totalMesesBruto % 12;
-    
-    document.getElementById("totalAnios").value = totalAnios;
-    document.getElementById("totalMeses").value = totalMeses;
+
+    // Calcular años máximos según edad
+    const datosPersonales = JSON.parse(localStorage.getItem("datosPersonales"));
+    if (datosPersonales) {
+        const fechaNac = new Date(datosPersonales.fechaNacimiento);
+        const hoy = new Date();
+        let edadActual = hoy.getFullYear() - fechaNac.getFullYear();
+        const mes = hoy.getMonth() - fechaNac.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+            edadActual--;
+        }
+        const aniosMaximos = edadActual - 18;
+
+        if (totalAnios > aniosMaximos) {
+            document.getElementById("totalAnios").textContent = totalAnios;
+            document.getElementById("totalMeses").textContent = totalMeses;
+            document.getElementById("errorTiempo").textContent =
+                `El total de experiencia (${totalAnios} años) supera el máximo posible según su edad (${aniosMaximos} años)`;
+            return;
+        }
+    }
+
+    document.getElementById("errorTiempo").textContent = "";
+    document.getElementById("totalAnios").textContent = totalAnios;
+    document.getElementById("totalMeses").textContent = totalMeses;
 }
 
-// Recalcula el total cada vez que se cambia un campo
 function escucharCambios() {
     const campos = [
         "aniosPublico", "mesesPublico",
@@ -87,7 +94,7 @@ function escucharCambios() {
         "aniosIndependiente", "mesesIndependiente"
     ];
 
-    campos.forEach(function (id) {
+    campos.forEach(function(id) {
         document.getElementById(id).addEventListener("input", calcularTotal);
     });
 }
