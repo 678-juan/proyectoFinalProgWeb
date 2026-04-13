@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido - Hoja de Vida</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>Formato Único Hoja de Vida</h1>
+        <p>Persona Natural</p>
+    </header>
+
+    <main>
+        <section id="bienvenida">
+            <div class="bienvenida-contenido">
+                <div class="bienvenida-icono">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <h2 id="saludo"></h2>
+
+                <!-- Sección para usuario sin hoja diligenciada -->
+                <div id="seccionComenzar">
+                    <p class="bienvenida-descripcion">
+                        Bienvenido al <strong>Formato Único de Hoja de Vida</strong> del
+                        Departamento Administrativo de la Función Pública — DAFP. <br><br>
+                        Aquí podrás diligenciar tu hoja de vida de forma fácil y rápida,
+                        siguiendo cada sección paso a paso.
+                    </p>
+                    <div class="bienvenida-pasos">
+                        <div class="paso">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Datos Personales</span>
+                        </div>
+                        <div class="paso">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Formación Académica</span>
+                        </div>
+                        <div class="paso">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <span>Experiencia Laboral</span>
+                        </div>
+                        <div class="paso">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Tiempo de Experiencia</span>
+                        </div>
+                        <div class="paso">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span>Certificación</span>
+                        </div>
+                    </div>
+                    <button onclick="comenzar()">
+                        <i class="fa-solid fa-play"></i> Comenzar
+                    </button>
+                </div>
+
+                <!-- Sección para usuario con hoja ya diligenciada -->
+                <div id="seccionEstado" style="display:none">
+                    <p class="bienvenida-descripcion">
+                        Tu hoja de vida ya fue diligenciada. Aquí puedes consultar su estado.
+                    </p>
+                    <div id="infoEstado"></div>
+                </div>
+
+                <br>
+                <button onclick="cerrarSesion()" style="background:transparent; color:var(--rojo); border-color:var(--rojo);">
+                    <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>DAFP — Línea gratuita: 018000917770</p>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/bienvenida.js"></script>
+
+</body>
+</html>

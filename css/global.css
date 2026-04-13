@@ -58,6 +58,7 @@ main {
     flex: 1;
     padding: 2rem;
     max-width: 800px;
+    margin: 0 auto;
 }
 
 section {
@@ -159,14 +160,16 @@ button[onclick="enviarHojaDeVida()"],
 button[onclick="continuarTiempo()"],
 button[onclick="continuarFormacion()"],
 button[onclick="continuarExperiencia()"],
-button[onclick="continuar()"] {
+button[onclick="continuar()"],
+button[onclick="comenzar()"] {
     background: var(--azul);
     color: var(--blanco);
     border-color: var(--azul);
 }
 
 button.primario:hover,
-button[onclick="login()"]:hover {
+button[onclick="login()"]:hover,
+button[onclick="comenzar()"]:hover {
     background: var(--azul-hover);
 }
 
@@ -227,4 +230,50 @@ footer {
     font-size: 12px;
     color: var(--texto-secundario);
     text-align: center;
+}
+
+/* ── BIENVENIDA ────────────────────────── */
+.bienvenida-contenido {
+    text-align: center;
+    padding: 2rem;
+}
+
+.bienvenida-icono {
+    font-size: 48px;
+    color: var(--azul);
+    margin-bottom: 1rem;
+}
+
+.bienvenida-descripcion {
+    font-size: 15px;
+    color: var(--texto-secundario);
+    max-width: 500px;
+    margin: 1rem auto 2rem;
+    line-height: 1.8;
+}
+
+.bienvenida-pasos {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.paso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 12px;
+    color: var(--texto-secundario);
+    background: var(--azul-claro);
+    border-radius: 12px;
+    padding: 1rem;
+    width: 100px;
+}
+
+.paso i {
+    font-size: 20px;
+    color: var(--azul);
 }
